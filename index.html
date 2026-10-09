@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Fresh, distraction-free portrait wallpapers for your phone.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>WALLDROP — Wallpaper of the moment</title>
+  <style>
+    :root { color-scheme: dark; --bg:#080b12; --panel:#111723; --muted:#9aa7bb; --line:#263144; --text:#f5f7fb; --accent:#d9e7ff; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; min-height:100%; background:var(--bg); color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif; }
+    body { min-height:100svh; padding: max(18px, env(safe-area-inset-top)) 16px max(22px, env(safe-area-inset-bottom)); }
+    .app { width:min(100%,520px); margin:0 auto; }
+    header { display:flex; align-items:center; gap:12px; padding:8px 2px 18px; }
+    .mark { width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#dce9ff,#6f8fbf);color:#101725;box-shadow:0 8px 28px #5f82ba25; }
+    .brand { font-weight:850;letter-spacing:.17em;font-size:15px; }
+    .tagline { color:var(--muted);font-size:12px;margin-top:4px; }
+    .pill { margin-left:auto; font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:7px 9px;color:#c6d2e5; }
+    .intro { margin:4px 2px 16px; }
+    h1 { font-size:27px;line-height:1.08;letter-spacing:-.04em;margin:0 0 8px;font-weight:750; }
+    .intro p { margin:0;color:var(--muted);font-size:13px;line-height:1.5; }
+    .wallpaper-wrap { position:relative;overflow:hidden;border-radius:24px;background:#151d2b;border:1px solid #ffffff14;box-shadow:0 22px 70px #0008; }
+    .wallpaper { display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:linear-gradient(150deg,#18243a,#080b12); }
+    .shade { position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#03060bd9);pointer-events:none; }
+    .image-meta { position:absolute;left:17px;right:17px;bottom:17px;display:flex;align-items:end;gap:10px; }
+    .meta-copy { min-width:0;flex:1; }
+    .eyebrow { font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#c7d5e9;margin-bottom:5px; }
+    .image-title { font-size:19px;line-height:1.15;font-weight:700;letter-spacing:-.02em;text-shadow:0 2px 15px #0009; }
+    .image-sub { color:#d1d8e4;font-size:11px;margin-top:6px; }
+    .actions { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px; }
+    button,.download-link { border:0;border-radius:15px;min-height:52px;padding:0 14px;display:flex;align-items:center;justify-content:center;gap:9px;font:650 14px inherit;cursor:pointer;text-decoration:none;transition:transform .15s,opacity .15s; }
+    button:active,.download-link:active { transform:scale(.98); }
+    .primary { background:var(--accent);color:#101827; }
+    .secondary { background:var(--panel);color:#f2f5fa;border:1px solid var(--line); }
+    button:disabled { opacity:.55;cursor:wait; }
+    .tip { display:flex;gap:10px;align-items:flex-start;margin:17px 2px 0;color:var(--muted);font-size:12px;line-height:1.5; }
+    .tip svg { flex:none;margin-top:1px;color:#c4d7f6; }
+    footer { margin:20px 2px 0;text-align:center;color:#68768c;font-size:10px;line-height:1.6; }
+    .toast { position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#eef3fc;color:#111827;padding:11px 15px;border-radius:999px;font-size:12px;font-weight:650;transition:.22s;box-shadow:0 8px 30px #0008;white-space:nowrap; }
+    .toast.show { opacity:1;transform:translate(-50%,0); }
+    @media(min-width:600px){ body{padding-top:28px}.wallpaper{aspect-ratio:9/15} }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="mark" aria-hidden="true">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M4 17.5 9 12l3 3 3.5-4L20 17.5" stroke="#101725" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16.8" cy="7.5" r="1.8" fill="#101725"/><rect x="3" y="3" width="18" height="18" rx="4" stroke="#101725" stroke-width="1.6"/></svg>
+      </div>
+      <div><div class="brand">WALLDROP</div><div class="tagline">A fresh view, whenever you open it.</div></div>
+      <div class="pill">9:16 · HD</div>
+    </header>
+    <section class="intro">
+      <h1>Your wallpaper.<br>Unexpectedly good.</h1>
+      <p>Clean, cinematic scenes. No people, no animals, no text—just the view.</p>
+    </section>
+    <section class="wallpaper-wrap" aria-label="Current wallpaper">
+      <img id="wallpaper" class="wallpaper" alt="Random scenic phone wallpaper" fetchpriority="high">
+      <div class="shade"></div>
+      <div class="image-meta">
+        <div class="meta-copy">
+          <div class="eyebrow" id="category">Today's view</div>
+          <div class="image-title" id="title">Finding your next view…</div>
+          <div class="image-sub">Portrait wallpaper · Unsplash photography</div>
+        </div>
+      </div>
+    </section>
+    <div class="actions">
+      <button class="primary" id="newBtn" type="button"><span>↻</span> New wallpaper</button>
+      <a class="download-link secondary" id="downloadBtn" href="#" download="walldrop-wallpaper.jpg"><span>↓</span> Download</a>
+    </div>
+    <div class="tip">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3 14.8 9.2 21 12l-6.2 2.8L12 21l-2.8-6.2L3 12l6.2-2.8L12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <div><strong style="color:#d9e3f2">Depth-effect tip:</strong> choose photos with clear layers—like a mountain ridge, an architectural edge or a planet against space. OxygenOS decides whether a photo supports its clock-over-subject effect.</div>
+    </div>
+    <footer>Images are loaded from Unsplash. A fresh selection is made when this page opens.<br>Use the browser download option if direct saving is restricted.</footer>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+<script>
+  // Curated scenic / architecture / abstract image set. No people or animals intended.
+  // Each entry uses a stable Unsplash image ID and portrait crop parameters.
+  const images = [
+    {id:"photo-1519608487953-e999c86e7455", title:"A sky full of stars", category:"SPACE"},
+    {id:"photo-1462331940025-496dfbfc7564", title:"Beyond the atmosphere", category:"COSMIC"},
+    {id:"photo-1519681393784-d120267933ba", title:"Under the Milky Way", category:"NIGHT SKY"},
+    {id:"photo-1464822759023-fed622ff2c3b", title:"Where the mountains rise", category:"MOUNTAINS"},
+    {id:"photo-1500530855697-b586d89ba3ee", title:"Into the wild", category:"LANDSCAPE"},
+    {id:"photo-1470770841072-f978cf4d019e", title:"Still water, quiet world", category:"LAKE"},
+    {id:"photo-1501785888041-af3ef285b470", title:"A different horizon", category:"LANDSCAPE"},
+    {id:"photo-1518837695005-2083093ee35b", title:"The rhythm of the ocean", category:"OCEAN"},
+    {id:"photo-1500375592092-40eb2168fd21", title:"Blue beyond blue", category:"OCEAN"},
+    {id:"photo-1511818966892-d7d671e672a2", title:"Lines of the city", category:"ARCHITECTURE"},
+    {id:"photo-1518005020951-eccb494ad742", title:"Built to stand out", category:"ARCHITECTURE"},
+    {id:"photo-1487958449943-2429e8be8625", title:"Quiet geometry", category:"ARCHITECTURE"},
+    {id:"photo-1511818966892-d7d671e672a2", title:"Urban symmetry", category:"CITY"},
+    {id:"photo-1519608487953-e999c86e7455", title:"Midnight blue", category:"SPACE"},
+    {id:"photo-1470252649378-9c29740c9fa8", title:"First light", category:"SUNRISE"},
+    {id:"photo-1470252649378-9c29740c9fa8", title:"Golden horizon", category:"LANDSCAPE"}
+  ];
+  // Remove any malformed IDs before use.
+  const safeImages = images.filter(x => /^[a-z0-9-]+$/.test(x.id));
+  let current = -1;
+  const img = document.getElementById("wallpaper");
+  const newBtn = document.getElementById("newBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const title = document.getElementById("title");
+  const category = document.getElementById("category");
+  const toast = document.getElementById("toast");
+  let toastTimer;
+  function notify(message) {
+    toast.textContent = message; toast.classList.add("show");
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+  }
+  function pickIndex() {
+    if (safeImages.length < 2) return 0;
+    let next = Math.floor(Math.random() * safeImages.length);
+    if (next === current) next = (next + 1 + Math.floor(Math.random() * (safeImages.length - 1))) % safeImages.length;
+    return next;
+  }
+  function loadWallpaper() {
+    newBtn.disabled = true;
+    const item = safeImages[pickIndex()];
+    current = safeImages.indexOf(item);
+    title.textContent = item.title;
+    category.textContent = item.category;
+    img.style.opacity = ".45";
+    const url = `https://images.unsplash.com/${item.id}?auto=format&fit=crop&w=1200&h=2400&q=90`;
+    const probe = new Image();
+    probe.onload = () => {
+      img.src = url; img.style.opacity = "1";
+      downloadBtn.href = url;
+      downloadBtn.setAttribute("download", `walldrop-${item.category.toLowerCase().replaceAll(" ","-")}.jpg`);
+      newBtn.disabled = false;
+    };
+    probe.onerror = () => {
+      newBtn.disabled = false;
+      notify("Couldn't load that image. Try another.");
+      setTimeout(loadWallpaper, 500);
+    };
+    probe.src = url;
+  }
+  img.style.transition = "opacity .25s";
+  newBtn.addEventListener("click", loadWallpaper);
+  downloadBtn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (!downloadBtn.href || downloadBtn.href === location.href + "#") return;
+    try {
+      const response = await fetch(downloadBtn.href);
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = objectUrl;
+      a.download = downloadBtn.getAttribute("download") || "walldrop-wallpaper.jpg";
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(objectUrl);
+      notify("Wallpaper download started");
+    } catch {
+      window.open(downloadBtn.href, "_blank", "noopener");
+      notify("Image opened in a new tab. Long-press to save.");
+    }
+  });
+  // A new selection is made every time the site is opened/reloaded.
+  loadWallpaper();
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+  }
+</script>
+</body>
+</html>
